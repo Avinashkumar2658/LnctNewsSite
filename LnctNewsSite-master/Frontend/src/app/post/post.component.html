@@ -1,0 +1,188 @@
+<br>
+<section class="content">
+    <div class="card" *ngIf='i == 2'>
+        <h3 class="card-body bg-success text-center mt-0 mb-0 pt-0 pb-0"> {{message}}</h3>
+    </div>
+    <div class="card" *ngIf='i == 3'>
+        <h3 class="card-body text-center bg-danger mt-0 mb-0 pt-0 pb-0"> {{message}}</h3>
+    </div>
+</section>
+
+<div class="container-fluid  pt-0 font-weight-bold">
+    <section class="pt-1 text-center">
+        <h1 class="heading">Post</h1>
+    </section>
+    <form action="" #postNews="ngForm" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row form-group mb-0">
+                <div class="col col-sm-6 col-xs-6 col-md-6 col-lg-6 pl-1 form-group">
+                    <label for="fntext"><h4 class="hp pl-5">Category<sup class="color">*</sup></h4></label>
+                </div>
+                <div class="col-sm-6 col-xs-6 col-lg-6 col-md-6 pr-5">
+                    <select class="form-control" ngModel #categoryId="ngModel" [(ngModel)]="news.categoryId" required name="categoryId" (change)="changeValue($event)" id="categoryId" [ngClass]="{'form-control' : true,
+                        'is-invalid' : !categoryId?.valid && categoryId?.touched}">
+                        <option *ngFor="let detail of details" value='{{detail.categoryId}}'>{{detail.categoryName}}</option>
+                    </select>
+                    <p *ngIf="categoryId?.errors?.required && categoryId?.touched" class="form-text custom-invalid-feedback" style="color: red; margin-bottom:-1rem; margin-left:2rem; margin-top: -.5rem;">Category is not selected</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" *ngIf="id == 1 || id == 2 || id == 3 || id == 4|| id == 5 || id == 6">
+
+            <div class="row form-group">
+                <div class="col-sm-4 pl-5">
+                    <label for="fntext"><h1 class="hp">Event Date<sup style="color:red">*</sup></h1></label>
+                </div>
+                <div class="col-sm-4 pr-5">
+                    <input type="date" ngModel [(ngModel)]='news.startDate' required placeholder="from" name="from_date" id="from_date" #from_date="ngModel" [ngClass]="{'form-control': true, 
+                        'is-invalid': !from_date?.valid && from_date?.touched }">
+                    <small id="fnHelp" *ngIf="from_date?.errors?.required && from_date?.touched" class="form-text custom-invalid-feedback color">Field is required</small>
+                </div>
+                <div class="col-sm-4 pr-5">
+                    <input type="date" ngModel [(ngModel)]='news.endDate' required placeholder="to" name="to" id="to" #to="ngModel" [ngClass]="{'form-control': true, 
+                        'is-invalid': !to?.valid && to?.touched}">
+                    <small id="fnHelp" *ngIf="to?.errors?.required && to?.touched" class="form-text custom-invalid-feedback color">Field is required</small>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6 pl-5">
+                    <label for="fntext"><h1 class="hp">heading<sup class="color">*</sup></h1></label>
+                </div>
+                <div class="col-sm-6 pr-5">
+                    <input type="text" ngModel [(ngModel)]='news.newsHeading' required minlength="8" placeholder="Enter Name" name="po" id="fntext" #bindname="ngModel" [ngClass]="{'form-control': true, 
+                        'is-invalid': !bindname?.valid && bindname?.touched,  
+                        'is-valid': bindname?.valid && bindname?.touched}">
+                    <small id="fnHelp" *ngIf="bindname?.errors?.required && bindname?.touched" class="form-text custom-invalid-feedback color">Field is required</small>
+                    <small id="fnHelp" *ngIf="bindname?.errors?.minlength && bindname?.touched" class="form-text custom-invalid-feedback color">requires atleast 8 characters.</small>                    <BR>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6 pl-5">
+                    <label for="fntext"><h1 class="hp">Detail<sup style="color:rgb(246, 8, 8)">*</sup></h1></label>
+                </div>
+                <div class="col-sm-6 pr-5">
+                    <textarea ngModel required rows="2" cols="50" [(ngModel)]='news.detail' #detail="ngModel" name="detail" minlength="20" placeholder="Enter Categorie Detail" [ngClass]="{'form-control': true, 
+                        'is-invalid': !detail?.valid && detail?.touched,  
+                        'is-valid': detail?.valid && detail?.touched}">
+                    </textarea>
+                    <small id="fnHelp" *ngIf="detail?.errors?.required && detail?.touched" class="form-text custom-invalid-feedback color">Field is required</small>
+                    <small id="fnHelp" *ngIf="detail?.errors?.minlength && detail?.touched" class="form-text custom-invalid-feedback color">requires atleast 20 characters.</small><BR>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6 pl-5">
+                    <label for="fntext"><h1 class="hp">Image in JPEG<sup class="color">*</sup></h1></label>
+                </div>
+                <div class="col-sm-6 pr-5">
+                    <input type="file" multiple name="photo" (change)="onChange($event)" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container" *ngIf="(id == 7 || id == 8 || id == 9)">
+            <div class="row form-group mb-0">
+                <div class="col  col-sm-3 col-xs-3 col-md-3 col-lg-3 pl-5  form-group">
+                    <label for="fntext"><h4 class="hp">Year<sup style="color: red;">*</sup></h4></label>
+                </div>
+                <div class="col-sm-3 col-xs-3 col-lg-3 col-md-3">
+                    <select class="form-control" ngModel #year="ngModel" [(ngModel)]="largeNews.year" required name="year" id="year" [ngClass]="{'form-control' : true,
+                            'is-invalid' : !year?.valid && year?.touched,
+                            'is-valid' : year?.valid && year?.touched}">
+                        <option *ngFor="let detail of years" value='{{detail}}'>{{detail}}</option>
+                    </select>
+                    <small *ngIf="year?.errors?.required && year?.touched" class="form-text custom-invalid-feedback color">year is not selected</small>
+                </div>
+                <div class="col col-sm-3 col-xs-3 col-md-3 col-lg-3 pl-5">
+                    <label for="fntext"><h4 class="hp">Semester<sup class="color">*</sup></h4></label>
+                </div>
+                <div class="col-sm-3 col-xs-3 col-lg-3 col-md-3 pr-5">
+                    <select class="form-control" ngModel #semester="ngModel" [(ngModel)]="largeNews.semester" required name="semester" id="semester" [ngClass]="{'form-control' : true,
+                            'is-invalid' : !semester?.valid && semester?.touched,
+                            'is-valid' : semester?.valid && semester?.touched}">
+                        <option value="" selected hidden>semester</option>
+                        <option *ngFor="let detail of semesters" value='{{detail}}'>{{detail}}</option>  
+                    </select>
+                    <small *ngIf="semester?.errors?.required && semester?.touched" class="form-text custom-invalid-feedback" style="color: red; margin-bottom:-1rem; margin-left:2rem; margin-top: -.5rem;">Semester is not selected</small>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6 pl-5">
+                    <label for="fntext"><h1 class="hp">heading<sup class="color">*</sup></h1></label>
+                </div>
+                <div class="col-sm-6 pr-5">
+                    <input type="text" ngModel class="mr-auto" [(ngModel)]="largeNews.largeNewsHeading" required minlength="8" placeholder="Enter Name" name="po" id="fntext" #bindname="ngModel" [ngClass]="{'form-control': true, 
+                        'is-invalid': !bindname?.valid && bindname?.touched,  
+                        'is-valid': bindname?.valid && bindname?.touched}">
+                    <small id="fnHelp" *ngIf="bindname?.errors?.required && bindname?.touched" class="form-text custom-invalid-feedback color">Field is required</small>
+                    <small id="fnHelp" *ngIf="bindname?.errors?.minlength && bindname?.touched" class="form-text custom-invalid-feedback color">requires atleast 8 characters.</small> <BR>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6 pl-5">
+                    <label for="fntext"><h1 class="hp">Detail<sup class="color">*</sup></h1></label>
+                </div>
+                <div class="col-sm-6 pr-5">
+                    <textarea ngModel required rows="2" cols="50" [(ngModel)]='largeNews.detail' #detail="ngModel" name="detail" minlength="20" placeholder="Enter Categorie Detail" [ngClass]="{'form-control': true, 
+                        'is-invalid': !detail?.valid && detail?.touched,  
+                        'is-valid': detail?.valid && detail?.touched}"></textarea>
+                    <small id="fnHelp" *ngIf="detail?.errors?.required && detail?.touched" class="form-text custom-invalid-feedback color">Field is required</small>
+                    <small id="fnHelp" *ngIf="detail?.errors?.minlength && detail?.touched" class="form-text custom-invalid-feedback color">requires atleast 20 characters.</small><BR>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6 pl-5">
+                    <label for="fntext"><h1 class="hp">File<sup class="color">*</sup></h1></label>
+                </div>
+                <div class="col-sm-6 pr-5">
+                    <input class="mr-auto" type="file" id="defaultFile" multiple name="file" (change)="onChange($event)" />
+                </div>
+            </div>
+        </div>
+        <div class="container" *ngIf="id == 10">
+            <div class="row form-group">
+                <div class="col-sm-6 pl-5">
+                    <label for="fntext"><h1 class="hp">Question<sup class="color">*</sup></h1></label>
+                </div>
+                <div class="col-sm-6 pr-5">
+                    <textarea ngModel required rows="2" cols="50" [(ngModel)]='question.question' #detail="ngModel" minlength="15" name="question" placeholder="Type your query" [ngClass]="{'form-control': true, 
+                        'is-invalid': !question?.valid && question?.touched,  
+                        'is-valid': question?.valid && question?.touched}"></textarea>
+                    <small id="fnHelp" *ngIf="question?.errors?.required && question?.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                    <small id="fnHelp" *ngIf="question?.errors?.minlength && question?.touched" class="form-text custom-invalid-feedback">requires atleast 15 characters.</small><BR>
+                </div>
+            </div>
+        </div>
+        <div class="container" *ngIf="!(id == 10)">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 pl-5"> <h1 class="hp">Website Link</h1></div>
+                    <div class="col-sm-6">
+                        <div class="custom-control custom-radio custom-control-inline"> 
+                            <input type="radio"  [(ngModel)]="link" name="admin" value="1"   id="customRadioInline1"
+                                (change)="onItemChange($event.target.value)"  class="custom-control-input"> 
+                            <label for="customRadioInline1" class="custom-control-label text-sm">Yes</label> 
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline"> 
+                            <input type="radio"  [(ngModel)]="link" name="nonAdmin" value="0"   id="customRadioInline2"
+                            (change)="onItemChange($event.target.value)"  class="custom-control-input"> 
+                            <label for="customRadioInline2" class="custom-control-label text-sm">No</label> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row pl-5 pr-5" *ngIf="link == 1">
+                    <div class="col-sm-12 col-md-12 col-xs-12"><input type="url"  ngModel [(ngModel)]='url' id="url" name="link" placeholder="Enter your website link" [ngClass]="{'form-control': true}"></div>  
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between ">
+            <button type="button" routerLink=" " class="btn  text bg-danger btn-sm btn-xs btn-md  btn-lg" (click)="top()">
+                Cancel
+            </button>
+            <button type="button" class="btn btnsubmit text btn-sm btn-xs btn-md btn-lg" (click)="savePost(news.categoryId, postNews)" [disabled]="postNews.invalid">
+                <span *ngIf="i == 0" class="spinner-border spinner-border-sm text-white"></span>&nbsp;&nbsp;Post      
+            </button>
+        </div>
+    </form>
+</div>

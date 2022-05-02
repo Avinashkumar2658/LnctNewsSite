@@ -1,0 +1,29 @@
+<div class="continer">
+    <div class="team-boxed" style="padding-bottom: -1rem;">
+        <div class="container">
+            <div class="row pt-5" *ngIf="responsse_status === 0">
+                <div class="col-12 ">
+                    <h3 class="text-center">Wait while loading data from server . . .</h3>
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row people">
+                <div class="col-md-6 col-lg-4 item" *ngFor="let alumni of alumnis; let i = index;">
+                    <div class="box">
+                        <img class="rounded-circle" [src]="alumni.profilePhoto" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'">
+                        <h3 class="name">{{alumni.userName}}</h3>
+                        <p class="title">{{alumni.presentProfile}}</p>
+                        <p class="title">{{alumni.emailId}}</p>
+                        <b>{{alumni.inspirationWord}}</b>
+                        <p class="description">{{alumni.someThingAboutYourSelf}} </p>
+                        <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

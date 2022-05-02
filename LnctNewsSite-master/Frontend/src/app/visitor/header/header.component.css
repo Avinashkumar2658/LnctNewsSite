@@ -1,0 +1,77 @@
+hr {
+    border: 0.1px solid black;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+.fa-home {
+    color: white !important;
+}
+img {
+    width: 240px;
+    height: 93px;
+    margin-top: -4.5rem;
+}
+nav.navbar li a {
+    color: rgb(255, 255, 255);
+    font: 20px sans-serif;
+    font-weight: 300;
+    animation: glow 5s ease-in-out infinite alternate;
+}
+.navbar-toggler {
+    margin-left: -1rem;
+}
+.fa-home {
+    margin-left: -0.7rem;
+}
+button{
+    outline: none;
+    border: none;
+}
+.loginLogoutBtn {
+    position:absolute; 
+    right:0; top: 0; 
+    left:10;
+    
+}
+.contentHeading {
+    margin-left: auto; 
+    margin-right: auto; 
+}
+.lnctPortal {
+    color:rgb(12, 8, 247);
+    text-shadow: 1.4px 1.4px #ff0202;
+}
+.studentFont {
+    color:rgb(250, 6, 26);
+    text-shadow: 2px 2px #ffe602;
+}
+.topHeader {
+    height:35px;
+    background-color: rgb(191, 194, 20);
+}
+.btn {
+    background-color: rgba(7, 7, 248, 0.815);
+}
+.navbar {
+    background-color: rgb(191, 194, 20);;
+}
+.nav-link {
+    padding-top: 2.3px !important; 
+    padding-bottom: 2.3px !important;
+}
+.dropdown-divider {
+    margin-top: -0.1rem;
+}
+.dropdown-item {
+    margin-top: -0.5rem;
+}
+.nav-item{
+    padding-top: 0% !important;
+    padding-bottom: 0% !important;
+}
+@media screen and (max-width: 600px) {
+    .contentHeading {
+        display: none   
+    }
+}
+

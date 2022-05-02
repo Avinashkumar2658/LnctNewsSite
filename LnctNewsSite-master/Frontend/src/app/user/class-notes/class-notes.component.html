@@ -1,0 +1,136 @@
+<br>
+<div class="containeer-fluid">
+    <h1 class="text-center glow">Class Material</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12 col-lg-4 col-md-4 col-xl-4 pl-5">
+                <h2>Choose semester</h2>
+            </div>
+            <div class="col-sm-6 col-xs-12 col-lg-4 col-md-4 col-xl-4 pl-5">
+                <select class="form-control p"  required name="semester" id="semester" [(ngModel)]="semester" (change)="executeUpdate(semester)" [ngClass]="{'form-control' : true,
+                    'is-invalid' : !semester?.valid && semester?.touched,
+                    'is-valid' : semester?.valid && semester?.touched}">
+                    <option value="" selected hidden>semester</option>
+                    <option *ngFor="let detail of semesters" value='{{detail}}'>{{detail}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="commentGroup">
+            <div id="replyGroup">
+                <div class="row mt-5">
+                    <div class="col-12 ">
+                        <div *ngIf="responsse_status === 0">
+                            <div class="spinner">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                        <div *ngIf="responsse_status === 1">
+                            <p class="text-center">Class Notes Not Found For Selected Semester</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" *ngFor="let classNote of classNotes; let i = index;">
+                    <div class="card border-0 rounded-4 mt-5 mb-1" [attr.id]="'classNotes-' + classNote.id">
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="mr-3 rounded-circle" alt="image" [src]="classNote.profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'"/>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading mt-2">
+                                    {{classNote.user_name}}
+                                </h5>
+                                <div class="d-flex justify-content-between">
+                                <p style="margin-top: -0.7rem;"> {{classNote.present_profile}}</p>
+                                <p class="mt fontDate">{{classNote.date}}</p>
+                                </div>
+                            </div>
+                        </div>      
+                        <hr class="mt-0">
+                        <div class="card-body">
+                            <h4 class="heading text-center">{{classNote.largeNewsHeading}}</h4>
+                        <p>
+                            {{classNote.detail}}
+                        </p>
+                        <a href="{{ classNote.url }}" target="_blank">
+                            {{classNote.file_name}}
+                        </a>  <br>
+                        <a href="{{ classNote.otherWebsiteLink }}" target="_blank"  *ngIf="classNote.otherWebsiteLink" class="pull-right">
+                            web link
+                        </a>  
+                        </div>
+                        <div class="bg-white p-2">
+                            <div class="p-2 cursor" data-toggle="collapse" [attr.href]="'#collapse-' + i" (click)="showComment(classNote.id)"><i class='far fa-comment  fa-2x' style="color: rgb(101, 214, 107);"></i><span class="ml-1">Comment</span></div>
+                        </div>   
+                        <div class="collapse" [attr.id]="'collapse-' + i" data-parent="#commentGroup">    
+                            <div class="card border-0 rounded-0 mb-1" style="box-shadow: 0px 8px 16px 0px white;">
+                                <form #commentForm="ngForm">
+                                    <div class="d-flex flex-row align-items-start">
+                                        <textarea class="ml-1 shadow-none textarea" name="comment" required minlength="10" ngModel [(ngModel)]="user_comment.comment" #comment="ngModel" placeholder="Enter your Comment"
+                                        [ngClass]="{'form-control': true, 
+                                        'is-invalid': !comment?.valid && comment?.touched}"></textarea>
+                                </div>
+                                <small id="f" *ngIf="comment?.errors?.required && comment?.touched" class="form-text custom-invalid-feedback color">Field is required </small>
+                                        <small id="f" *ngIf="comment?.errors?.minlength && comment?.touched" class="form-text custom-invalid-feedback color">comment requires atleast 10 characters.</small>
+                
+                                    <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button" [disabled]="commentForm.invalid" (click)="saveComment(classNote.id, commentForm)"> <span *ngIf="spinner_status == 1" class="spinner-border spinner-border-sm text-white"></span>&nbsp;&nbsp;Post comment</button></div>    
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12" id="replyGroup">
+                                                <div class="media" *ngFor="let comment of commentResponse;"> 
+                                                    <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" [src]="comment.user_profile" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'"/>                                   
+                                                    <div class="media-body">
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <h5 class="mtu-1">{{comment.userName}}</h5>
+                                                                <p class="mt">{{comment.present_profile}}</p> <p class="mt fontDate">{{comment.date}}</p>
+                                                            </div> 
+                                                            <div class="col-4" >                      
+                                                                <div class="pull-right cursor reply action-collapse" data-toggle="collapse" [attr.href]="'#reply' + comment.commentId" (click)="showReply(comment.commentId)"><i class="fa fa-reply" style="color: blue;"></i><span class="ml-1" style="color: blue;">Reply</span></div>
+                                                            </div> 
+                                                        </div>                                             
+                                                        <p class="font"> {{comment.commentReply}}</p>
+                                                        <div class="collapse" [attr.id]="'reply' + comment.commentId"  data-parent="#replyGroup"> 
+                                                            <div class="media mt-4" *ngFor="let reply of replyResponse"> 
+                                                                <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" [src]="reply.user_profile" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'"/></a>
+                                                                <div class="media-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <h5 class="mtu-1">{{reply.userName}}</h5>
+                                                                            <p class="mt">{{reply.present_profile}}</p> <p class="mt fontDate">{{reply.date}}</p>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <p class="font">{{reply.commentReply}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <form #replyForm="ngForm">
+                                                            <div class="d-flex flex-row align-items-start">
+                                                                <textarea class="ml-1 shadow-none textarea" name="reply" required minlength="5" ngModel [(ngModel)]="user_reply.reply" #reply="ngModel" placeholder="Enter your reply"
+                                                                [ngClass]="{'form-control': true, 
+                                                                'is-invalid': !reply?.valid && reply?.touched}"></textarea>
+                                                            </div>
+                                                            <small id="f" *ngIf="reply?.errors?.required && reply?.touched" class="form-text custom-invalid-feedback color">Field is required </small>
+                                                            <small id="f" *ngIf="reply?.errors?.minlength && reply?.touched" class="form-text custom-invalid-feedback color">requires atleast 5 characters.</small>
+                                                            <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button" [disabled]="replyForm.invalid" (click)="saveReply(comment.commentId, replyForm)"> <span *ngIf="spinner_status == 0" class="spinner-border spinner-border-sm text-white"></span>&nbsp;&nbsp;Reply</button></div>
+                                                            </form>
+                                                        </div>  
+                                                    </div>
+                                                </div>     
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>         
+                            </div>  
+                        </div>
+                        <button type="button" class="boundary ml-auto" *ngIf="admin || classMaterialEventCreatoruserId == classNote.user_id" (click)="executeDeleteClassNotes(classNote.id)"><span class="fas fa-trash  fa-1x"></span></button>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container-fluid topHeader">
+    <div class="d-flex justify-content-between">
+        <div>
+            <a routerLink="">
+                &nbsp;<i class="fas fa-home fa-2x" ></i>
+               </a>
+        </div>
+        <div class="contentHeading">
+            <strong>
+              <h2 class="lnctPortal">LNCT<span class="studentFont">news</span>
+             <span class="lnctPortal">SITE</span>
+            </h2>
+            </strong>
+         </div>
+        <div *ngIf="isLoggedIn; else loggedOut">
+            <div class="d-flex justify-content-start loginLogoutBtn">
+                <div class="nav-item dropdown">
+                    <a class="nav-link btn text-white" data-toggle="dropdown">
+                        profile
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-md dropdown-menu-lg dropdown-menu-xl dropdown-menu-right" style="width: 2rem !important;">
+                        <a routerLink="profile" routerLinkActive="active-link" class="dropdown-item">
+                            <i class="fas fa-users mr-2"></i> profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a routerLink="user_post_update" routerLinkActive="active-link" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> post &#38; activity
+        
+                        </a>
+                        <div class="dropdown-divider" *ngIf="admin"></div>
+                        <a routerLink="admin/userManagement" routerLinkActive="active-link" class="dropdown-item mr-2" *ngIf="admin">
+                            <i class="fas fa-users mr-2"></i>user update
+        
+                        </a>
+                    </div>
+                </div>
+                <p class="mb-0 mt-0"> &nbsp;</p>
+                <a href="/logout" routerLinkActive="active-link" class="btn  btn-sm text-white" (click)="logout()">
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div>
+        <ng-template #loggedOut>
+            <div class="d-flex justify-content-start loginLogoutBtn">
+                <a routerLink="['account']" routerLinkActive="active-link" [queryParams]="{type: 'login'}" class="btn  btn-sm text-white " (click)="openModal('custom-modal-1')">
+                        Log in
+                </a>&nbsp;&nbsp;
+                <a routerLink="['account']" routerLinkActive="active-link" [queryParams]="{type: 'register'}" class="btn  btn-sm text-white" (click)="openModal('custom-modal-2')">
+                    Sign up
+                </a>
+            </div>
+        </ng-template>
+        </div>
+    </div>
+</div>
+  
+<hr>
+
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-expand-md navbar-expand-xs navbar-light">
+    <button class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <p class="navbar-toggler-icon">
+            <i class="fas"></i>
+        </p>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a routerLink="alumni" class="nav-link">Alumni</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="question" class="nav-link">Discuss</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="tnp" class="nav-link">Tnp</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="exam" class="nav-link">Exam</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="classnotes">class Notes</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="post" class="nav-link">post</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+<div>
+    <app-login></app-login>
+</div>
+<div>
+    <app-register></app-register>
+</div>

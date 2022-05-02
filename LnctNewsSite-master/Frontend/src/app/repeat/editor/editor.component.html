@@ -1,0 +1,30 @@
+<div id="content" class="container">
+  <form (ngSubmit)="onSubmit(rteForm)" #rteForm="ngForm">
+    <div class="form-group">
+      <ejs-richtexteditor
+
+      [insertImageSettings]="imageSettings"
+        #fromRTE
+        #name="ngModel"
+        [(value)]="value"
+        required
+        name="name"
+        [(ngModel)]="answer.answer"
+        (created)="rteCreated()"
+        [toolbarSettings]="tools"
+      >
+      </ejs-richtexteditor>
+
+      <div *ngIf="name.invalid && name.touched" class="alert alert-danger">
+        <div *ngIf="name.errors.required">Value is required.</div>
+      </div>
+    </div>
+    <div id="btn-container">
+      <button type="submit" ejs-button  (click)="saveAnswer(rteForm)">
+        Submit
+      </button>
+
+      <button type="reset" ejs-button style="margin-left: 20px">Reset</button>
+    </div>
+  </form>
+</div>

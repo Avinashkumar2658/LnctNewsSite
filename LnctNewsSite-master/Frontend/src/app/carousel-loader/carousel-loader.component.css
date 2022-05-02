@@ -1,0 +1,32 @@
+.inner {
+    width: 20%;
+}
+
+.align-self-start {
+    width: 60%;
+    min-width: 20rem;
+}
+
+.outer {
+    width: 20%;
+}
+
+@media screen and (max-width: 900px) {
+    div.outer,
+    div.inner {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    div.align-self-start {
+        width: 100%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    div.align-self-start {
+        display: none;
+    }
+}

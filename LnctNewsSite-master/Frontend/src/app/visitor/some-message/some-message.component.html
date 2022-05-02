@@ -1,0 +1,207 @@
+<section class="pt-0 pb-0 deviceWidth">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-3 glow">Message From Top CEO'S</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" *ngIf="responsse_status === 2">
+                <div id="carouselsomeMessageFromTopCeo" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <ng-container *ngFor="let item of iterator; let i = index;">
+                            <div class="carousel-item"  [ngClass]="{'active': i === 0}">
+                               <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                                        <div class="card" [attr.id]="'messageEventCard-' + someMessageFromTopCeo[item].newsId">
+                                            <img class="img-fluid" alt="100%x280" [src]="someMessageFromTopCeo[item].photo" [attr.id]="'imageMessage' + item">
+                                            <div class="mt row" [attr.id]="'userProfileMessage' + item">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="someMessageFromTopCeo[item].user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="mt-0 text-left text-white">{{someMessageFromTopCeo[item].user_name}}</h4>
+                                                        <p style="margin-top: -0.8rem;" class="text-white">{{someMessageFromTopCeo[item].user_role}}<small><i>&nbsp;&nbsp;{{someMessageFromTopCeo[item].createDate}}</i></small></p>
+                                                    </div>
+                                                </div>
+                                                <p class="text-white" *ngIf="admin">&emsp;{{someMessageFromTopCeo[item].userId}}</p> 
+                                            </div>
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{someMessageFromTopCeo[item].newsHeading}}
+                                                </h4>
+                                                <p class="card-text collapse" [attr.id]="'collapseMessage' + item" aria-expanded="false">{{someMessageFromTopCeo[item].detail}}</p>
+                                                <br>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapse" [attr.href]="'#collapseMessage' + item" aria-expanded="false" aria-controls="collapseMessage" (click)="MesageToggleImage(item)"><span [attr.id]="'moreMessage' + item">+ more</span><span [attr.id]="'lessMessage' + item" class="hidden">- Less</span></button>
+                                                    <div><button type="button" class="boundary" *ngIf="admin || messageCreatoruserId == someMessageFromTopCeo[item].userId" (click)="executeDeleteNews(someMessageFromTopCeo[item].newsId)"><span class="fas fa-trash  fa-1x"></span></button> </div>
+                                                    <div *ngIf="someMessageFromTopCeo[item].url" class="pull-right"><a href="{{ someMessageFromTopCeo[item].url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                                        <div class="card" *ngIf="(item + 1) < someMessageFromTopCeo.length" [attr.id]="'messageEventCard-' + someMessageFromTopCeo[item + 1].newsId">
+                                            <img  class="img-fluid" alt="100%x280" [src]="someMessageFromTopCeo[item+1].photo" [attr.id]="'imageMessage' + (item + 1)">
+                                            <div class="mt row" [attr.id]="'userProfileMessage' + (item + 1)">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="someMessageFromTopCeo[item + 1].user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h4 class="mt-0 text-left text-white">{{someMessageFromTopCeo[item + 1].user_name}}</h4>
+                                                            <p style="margin-top: -0.8rem;" class="text-white">{{someMessageFromTopCeo[item + 1].user_role}}<small><i>&nbsp;&nbsp;{{someMessageFromTopCeo[item + 1].createDate}}</i></small></p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="text-white" *ngIf="admin">&emsp;{{someMessageFromTopCeo[item + 1].userId}}</p> 
+                                            </div>
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{someMessageFromTopCeo[item+1].newsHeading}}</h4>
+                                                <p class="card-text collapse"  [attr.id]="'collapseMessage' + (item + 1)" aria-expanded="false">{{someMessageFromTopCeo[item+1].detail}}
+                                                </p>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapse" [attr.href]="'#collapseMessage' + (item + 1)" aria-expanded="false" aria-controls="collapseMessage" (click)="MesageToggleImage(item + 1)"><span [attr.id]="'moreMessage' + (item + 1)">+ more</span><span [attr.id]="'lessMessage' + (item + 1)" class="hidden">- Less</span></button>
+                                                    <div><button type="button" class="boundary" *ngIf="admin || messageCreatoruserId == someMessageFromTopCeo[item + 1].userId" (click)="executeDeleteNews(someMessageFromTopCeo[item+1].newsId)"><span class="fas fa-trash  fa-1x"></span></button> </div>
+                                                    <div  *ngIf="someMessageFromTopCeo[item + 1].url" class="pull-right"><a href="{{someMessageFromTopCeo[item + 1].url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                                        <div class="card" *ngIf="(item + 2) < someMessageFromTopCeo.length" [attr.id]="'messageEventCard-' + someMessageFromTopCeo[item + 2].newsId">
+                                            <img class="img-fluid" alt="100%x280" [src]="someMessageFromTopCeo[item+2].photo" [attr.id]="'imageMessage' + (item+2)">
+                                            <div class="mt row" [attr.id]="'userProfileMessage'+(item + 2)">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="someMessageFromTopCeo[item + 2].user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                    </div>
+                                                     <div class="media-body">
+                                                            <h4 class="mt-0 text-left text-white">{{someMessageFromTopCeo[item + 2].user_name}}</h4>
+                                                            <p style="margin-top: -0.8rem;" class="text-white">{{someMessageFromTopCeo[item + 2].user_role}}<small><i>&nbsp;&nbsp;{{someMessageFromTopCeo[item + 2].createDate}}</i></small></p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="text-white" *ngIf="admin">&emsp;{{someMessageFromTopCeo[item + 2].userId}}</p> 
+                                            </div>
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{someMessageFromTopCeo[item+2].newsHeading}}</h4>
+                                                <p class="card-text collapse" [attr.id]="'collapseMessage' + (item + 2)" aria-expanded="false">{{someMessageFromTopCeo[item+2].detail}}</p>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapse" [attr.href]="'#collapseMessage' + (item + 2)" aria-expanded="false" aria-controls="collapseMessage" (click)="MesageToggleImage(item + 2)"><span [attr.id]="'moreMessage' + (item + 2)">+ more</span><span [attr.id]="'lessMessage' + (item + 2)" class="hidden">- Less</span></button>
+                                                    <div><button type="button" class="boundary" *ngIf="admin || messageCreatoruserId == someMessageFromTopCeo[item + 2].userId" (click)="executeDeleteNews(someMessageFromTopCeo[item+2].newsId)"><span class="fas fa-trash  fa-1x"></span></button> </div>
+                                                    <div *ngIf="someMessageFromTopCeo[item + 2].url"  class="pull-right"><a href="{{ someMessageFromTopCeo[item + 2].url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div> 
+                               </div>                                    
+                            </div>
+                        </ng-container> 
+                    </div>        
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 ">
+                <div *ngIf="responsse_status === 0">
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                </div>
+                <div *ngIf="responsse_status === 1">
+                    <p class="text-center">no message found</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">    
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-primary mb-3 mr-1" href="#carouselsomeMessageFromTopCeo" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn btn-primary mb-3 " href="#carouselsomeMessageFromTopCeo" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>   
+        </div>     
+    </div>
+</section>
+
+<section class="pt-0 pb-0 deviceMinWidth">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-3 glow">no message found</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" *ngIf="responsse_status === 2">
+                <div id="carouselsomeMessageFromTopCeoSmallDevice" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <ng-container *ngFor="let event of someMessageFromTopCeo; let ind = index">
+                            <div class="carousel-item"  [ngClass]="{'active': ind === 0}">
+                            <div class="row">
+                                    <div class="col">
+                                        <div class="card" [attr.id]="'smallDeviceMessageEventCard-' + event.newsId">
+                                            <img class="img-fluid" alt="100%x280" [src]="event.photo"  [attr.id]="'imageSmallMessage'+ind">
+                                            <div class="mt" [attr.id]="'userProfileSmallMessage'+ind">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="event.user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="mt-0 text-left text-white">{{event.user_name}}</h4>
+                                                        <p style="margin-top: -0.8rem;" class="text-white">{{event.user_role}}<small><i>&nbsp;&nbsp;{{event.createDate}}</i></small></p>
+                                                    </div>
+                                                    <p class="text-white" *ngIf="admin">&emsp;{{event.userId}}</p> 
+                                                </div>
+                                                
+                                            </div> 
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{event.newsHeading}}</h4>
+                                                <p class="card-text collapse" [attr.id]="'collapseMessage' + ind" aria-expanded="false">{{event.detail}}</p>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapse" [attr.href]="'#collapseMessage' + ind" aria-expanded="false" aria-controls="collapseMessage" (click)="MessageToggleImageSmallDevice(ind)"><span [attr.id]="'moreSmallDeviceMessage' + ind">+ more</span><span [attr.id]="'lessSmallDeviceMessage' + ind" class="hiddenSmallDevice">- Less</span></button>
+                                                    <button type="button" class="boundary" *ngIf="admin || messageCreatoruserId == event.userId" (click)="executeDeleteNews(event.newsId)"><span class="fas fa-trash  fa-1x"></span></button>
+                                                    <div *ngIf="event.url" class="pull-right4"><a href="{{ event.url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>          
+                            </div>
+                        </ng-container> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 ">
+                <div *ngIf="responsse_status === 0">
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                </div>
+                <div *ngIf="responsse_status === 1">
+                    <p class="text-center">there is no event</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">    
+            </div>
+            <div class="col-6 text-right navButton">
+                <a class="btn btn-primary mb-3 mr-1" href="#carouselsomeMessageFromTopCeoSmallDevice" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn btn-primary mb-3 " href="#carouselsomeMessageFromTopCeoSmallDevice" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>       
+    </div>
+</section>

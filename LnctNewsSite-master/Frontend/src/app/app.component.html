@@ -1,0 +1,10 @@
+<div *ngIf="basicAuth.pageId()==='home'">
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+
+
+</div>
+<div *ngIf="basicAuth.pageId()==='reset-password'">
+    <router-outlet></router-outlet>
+</div>

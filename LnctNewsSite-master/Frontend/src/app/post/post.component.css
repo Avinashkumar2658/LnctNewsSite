@@ -1,0 +1,90 @@
+.content {
+    background: black
+}
+
+.heading {
+    color:rgb(255, 255, 255); 
+    font: 1em sans-serif; 
+    font-size: 1.5rem;
+    background-color:black;
+}
+.container {
+    padding: 0% !important;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-fluid {
+    width: 67%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+}
+.color {
+    color: red;
+}
+.text {
+    color:white;
+    font-weight: 500;
+    font: 1em sans-serif;
+}
+.pr {
+    padding-right: 4rem;
+}
+button {
+    width: 10rem;
+}
+
+.btnsubmit {
+    background: rgb(3, 250, 57)
+}
+
+.hp {
+    font: 1.5em sans-serif;
+    font-weight: 300;
+    color: black;
+}
+
+.font {
+    color: white;
+    font: 1.8em sans-serif;
+    font-weight: normal;
+    margin-top: -0.4rem;
+    margin-bottom: -0.5rem;
+}
+.content {
+    width:60%;
+    margin-top: 3rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media screen and (max-width: 950px) {
+    .container-fluid {
+        width: 100%;
+        margin: auto;
+        /* padding: 0% !important; */
+        margin-top: 1rem;
+    }
+    .pr-51{
+        padding-right: -10.3rem !important;
+        margin-right: -10rem !important;
+    }
+    .pl-5 {
+        padding-left: 0rem !important;
+    }
+    .hp {
+        padding-left: -4.5rem !important;
+    }
+    .content {
+        margin-top: 3rem;
+        width:100%
+    }
+    .col-sm-6, .col-sm-3 {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+
+    }
+
+}

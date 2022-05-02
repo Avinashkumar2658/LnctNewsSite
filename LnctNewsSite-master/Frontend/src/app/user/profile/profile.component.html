@@ -1,0 +1,76 @@
+
+    <div class="container-fluid px-4 px-md-4 py-5 mx-auto">
+        <div class="row d-flex justify-content-between align">
+<div class="card border-0 rounded-0 mb-5 mt-5 ">
+    <h1 class="mb-2 text-center">Update Profile</h1>
+   
+    
+
+
+    <form action="" #registration="ngForm">
+        <div class="picture-container">
+            <div class="picture" >
+                <img  [src]="retrievedImages" class="picture-src" id="wizardPicturePreview" title="">
+                <input type="file"  id="selectedFiles" #imageName name="photo" (change)="onChange($event)" accept=".jpg,.jpeg,.png"/>
+            </div>
+             <h6 class="">Choose Picture</h6>
+      
+        </div>
+        <div class="form-group">
+            <label for="userName">User Name</label>
+            <input type="text" class="mb-3 mt bg-white" #userName="ngModel" placeholder="user name" ngModel [ngModel]="user.userName" name="userName" [ngClass]="{ 
+                'is-invalid': !userName?.valid && userName?.touched,  
+                'is-valid': userName?.valid && userName?.touched }" />
+        </div>
+        <div class="form-group">
+            <label for="enrollment">EnrollMent No</label>
+            <input type="text" #enrollment="ngModel" placeholder="enrollment no" ngModel [(ngModel)]="user.enrollmentNo" name="enrollment" class="mb-3 mt" [disabled]="true" [ngClass]="{ 
+                'is-invalid': !enrollment?.valid && enrollment?.touched,  
+                'is-valid': enrollment?.valid && enrollment?.touched }" />
+        </div>
+        <div class="form-group">
+            <label for="emailId">Email Id</label>
+            <input type="text" #emailId="ngModel" placeholder="email id" ngModel [(ngModel)]="user.emailId" name="emailId" class="mb-3 mt" [disabled]="true" [ngClass]="{ 
+                'is-invalid': !emailId?.valid && emailId?.touched,  
+                'is-valid': emailId?.valid && emailId?.touched }" />
+        </div>
+        <div class="form-group">
+            <label for="presentProfile">Present Profile</label>
+            <input type="text" #presentProfile="ngModel" placeholder="Present profile" ngModel [(ngModel)]="user.presentProfile" name="presentProfile" class="mb-3 mt" [ngClass]="{ 
+                'is-invalid': !presentProfile?.valid && presentProfile?.touched,  
+                'is-valid': presentProfile?.valid && presentProfile?.touched }" />
+        </div>
+        <div class="form-group">
+            <label for="inspirationWord">Inspiration Thought</label>
+            <input type="text" #inspirationWord="ngModel" placeholder="Inspiration Thought" ngModel [(ngModel)]="user.inspirationWord" name="inspirationWord" class="mb-3 mt" [ngClass]="{ 
+                'is-invalid': !inspirationWord?.valid && inspirationWord?.touched,  
+                'is-valid': inspirationWord?.valid && inspirationWord?.touched }" />
+        </div>
+        
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="about-inputs">
+                    <label>About</label> 
+                    <textarea class="form-control" #inspirationWord="ngModel" type="text" name="about" ngModel [(ngModel)]="user.someThingAboutYourSelf" placeholder="Tell us about yourself"> </textarea> 
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+
+           <div class="row px-3 mt-5">
+                <button type="submit" class="btn btn-danger px-3 mr-auto" routerLink="">Cancel</button> 
+               <button type="submit" class="btn btn-yellow px-3 ml-auto" (click)="executeUpdateUser()"><span *ngIf="i == 0" class="spinner-border spinner-border-sm text-white"></span> &nbsp; Update</button> </div> 
+        </div>
+    </form> 
+
+    
+</div>
+
+
+    </div>
+    </div>

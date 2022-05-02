@@ -1,0 +1,213 @@
+<section class="pt-0 pb-0 deviceWidth">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-3 glow">Events In Bhopal</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" *ngIf="responsse_status === 2">
+                <div id="carouseleventInBhopal" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <ng-container *ngFor="let item of iterator; let i = index;">
+                            <div class="carousel-item"  [ngClass]="{'active': i === 0}">
+                               <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                                        <div class="card" [attr.id]="'bhopalEventCard-' + eventInBhopal[item].newsId">
+                                            <img class="img-fluid" alt="100%x280" [src]="eventInBhopal[item].photo" [attr.id]="'imageEventInBhopal' + item">
+                                            <div class="mt row" [attr.id]="'userProfileEventInBhopal' + item">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="eventInBhopal[item].user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="mt-0 text-left text-white">{{eventInBhopal[item].user_name}}</h4>
+                                                        <p style="margin-top: -0.8rem;" class="text-white">{{eventInBhopal[item].user_role}}<small><i>&nbsp;&nbsp;{{eventInBhopal[item].createDate}}</i></small></p>
+                                                    </div>
+                                                </div>
+                                                <p class="text-white" *ngIf="admin">&emsp;{{eventInBhopal[item].userId}}</p> 
+                                            </div>
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{eventInBhopal[item].newsHeading}}
+                                                </h4>
+                                                <p class="card-text collapse" [attr.id]="'collapseBhopal' + item" aria-expanded="false">{{eventInBhopal[item].detail}}
+                                                    <br> event  from <b>{{eventInBhopal[item].startDate}}</b> to <b>{{eventInBhopal[item].endDate}}</b>
+                                                </p>
+                                                <br>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapse" [attr.href]="'#collapseBhopal' + item" aria-expanded="false" aria-controls="collapseBhopal" (click)="EventInBhopalToggleImage(item)"><span [attr.id]="'moreEventInBhopal' + item">+ more</span><span [attr.id]="'lessEventInBhopal' + item" class="hidden">- Less</span></button>
+                                                    <div><button type="button" class="boundary" *ngIf="admin || bhopalEventCreatoruserId == eventInBhopal[item].userId" (click)="executeDeleteNews(eventInBhopal[item].newsId)"><span class="fas fa-trash  fa-1x"></span></button> </div>
+                                                    <div *ngIf="eventInBhopal[item].url" class="pull-right"><a href="{{ eventInBhopal[item].url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                                        <div class="card" *ngIf="(item + 1) < eventInBhopal.length" [attr.id]="'bhopalEventCard-' + eventInBhopal[item + 1].newsId">
+                                            <img  class="img-fluid" alt="100%x280" [src]="eventInBhopal[item+1].photo" [attr.id]="'imageEventInBhopal' + (item + 1)">
+                                            <div class="mt row" [attr.id]="'userProfileEventInBhopal' + (item + 1)">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="eventInBhopal[item + 1].user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h4 class="mt-0 text-left text-white">{{eventInBhopal[item + 1].user_name}}</h4>
+                                                            <p style="margin-top: -0.8rem;" class="text-white">{{eventInBhopal[item + 1].user_role}}<small><i>&nbsp;&nbsp;{{eventInBhopal[item + 1].createDate}}</i></small></p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="text-white" *ngIf="admin">&emsp;{{eventInBhopal[item + 1].userId}}</p> 
+                                            </div>
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{eventInBhopal[item+1].newsHeading}}</h4>
+                                                <p class="card-text collapse"  [attr.id]="'collapseBhopal' + (item + 1)" aria-expanded="false">{{eventInBhopal[item+1].detail}}
+                                                    <br> event  from <b>{{eventInBhopal[item + 1].startDate}}</b> to <b>{{eventInBhopal[item + 1].endDate}}</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapseBhopal" [attr.href]="'#collapseBhopal' + (item + 1)" aria-expanded="false" aria-controls="collapseBhopal" (click)="EventInBhopalToggleImage(item + 1)"><span [attr.id]="'moreEventInBhopal' + (item + 1)">+ more</span><span [attr.id]="'lessEventInBhopal' + (item + 1)" class="hidden">- Less</span></button>
+                                                    <div><button type="button" class="boundary" *ngIf="admin || bhopalEventCreatoruserId == eventInBhopal[item + 1].userId" (click)="executeDeleteNews(eventInBhopal[item+1].newsId)"><span class="fas fa-trash  fa-1x"></span></button> </div>
+                                                    <div  *ngIf="eventInBhopal[item + 1].url" class="pull-right"><a href="{{eventInBhopal[item + 1].url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                                        <div class="card" *ngIf="(item + 2) < eventInBhopal.length" [attr.id]="'bhopalEventCard-' + eventInBhopal[item + 2].newsId">
+                                            <img class="img-fluid" alt="100%x280" [src]="eventInBhopal[item+2].photo" [attr.id]="'imageEventInBhopal' + (item+2)">
+                                            <div class="mt row" [attr.id]="'userProfileEventInBhopal'+(item + 2)">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="eventInBhopal[item + 2].user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                    </div>
+                                                     <div class="media-body">
+                                                            <h4 class="mt-0 text-left text-white">{{eventInBhopal[item + 2].user_name}}</h4>
+                                                            <p style="margin-top: -0.8rem;" class="text-white">{{eventInBhopal[item + 2].user_role}}<small><i>&nbsp;&nbsp;{{eventInBhopal[item + 2].createDate}}</i></small></p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="text-white" *ngIf="admin">&emsp;{{eventInBhopal[item + 2].userId}}</p> 
+                                            </div>
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{eventInBhopal[item+2].newsHeading}}</h4>
+                                                <p class="card-text collapse" [attr.id]="'collapseBhopal' + (item + 2)" aria-expanded="false">{{eventInBhopal[item+2].detail}}
+                                                    <br> event  from <b>{{eventInBhopal[item + 2].startDate}}</b> to <b>{{eventInBhopal[item + 2].endDate}}</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapse" [attr.href]="'#collapseBhopal' + (item + 2)" aria-expanded="false" aria-controls="collapseBhopal" (click)="EventInBhopalToggleImage(item + 2)"><span [attr.id]="'moreEventInBhopal' + (item + 2)">+ more</span><span [attr.id]="'lessEventInBhopal' + (item + 2)" class="hidden">- Less</span></button>
+                                                    <div><button type="button" class="boundary" *ngIf="admin || bhopalEventCreatoruserId == eventInBhopal[item + 2].userId" (click)="executeDeleteNews(eventInBhopal[item+2].newsId)"><span class="fas fa-trash  fa-1x"></span></button> </div>
+                                                    <div *ngIf="eventInBhopal[item + 2].url"  class="pull-right"><a href="{{ eventInBhopal[item + 2].url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div> 
+                               </div>                                    
+                            </div>
+                        </ng-container> 
+                    </div>        
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 ">
+                <div *ngIf="responsse_status === 0">
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                </div>
+                <div *ngIf="responsse_status === 1">
+                    <p class="text-center">there is no event in Bhopal</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">    
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-primary mb-3 mr-1" href="#carouseleventInBhopal" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn btn-primary mb-3 " href="#carouseleventInBhopal" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>   
+        </div>     
+    </div>
+</section>
+
+<section class="pt-0 pb-0 deviceMinWidth">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-3 glow">Events In Bhopal</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" *ngIf="responsse_status === 2">
+                <div id="carouseleventInBhopalSmallDevice" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <ng-container *ngFor="let event of eventInBhopal; let ind = index">
+                            <div class="carousel-item"  [ngClass]="{'active': ind === 0}">
+                            <div class="row">
+                                    <div class="col">
+                                        <div class="card" [attr.id]="'smallDeviceBhopalEventCard-' + event.newsId">
+                                            <img class="img-fluid" alt="100%x280" [src]="event.photo"  [attr.id]="'imagesmallEventInBhopal'+ind">
+                                            <div class="mt" [attr.id]="'userProfileSmallEventInBhopal'+ind">
+                                                <div class="media mb-0">
+                                                    <div class="media-left">
+                                                        <img class="rounded-circle" [src]="event.user_profile_photo" onerror="this.onerror=null; this.src='../assets/dist/img/blank-profile.png'" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="mt-0 text-left text-white">{{event.user_name}}</h4>
+                                                        <p style="margin-top: -0.8rem;" class="text-white">{{event.user_role}}<small><i>&nbsp;&nbsp;{{event.createDate}}</i></small></p>
+                                                    </div>
+                                                    <p class="text-white" *ngIf="admin">&emsp;{{event.userId}}</p> 
+                                                </div>       
+                                            </div> 
+                                            <div class="card-body d-flex flex-column">
+                                                <h4 class="card-title">{{event.newsHeading}}</h4>
+                                                <p class="card-text collapse" [attr.id]="'collapseBhopal' + ind" aria-expanded="false">{{event.detail}}
+                                                    <br> event  from <b>{{event.startDate}}</b> to <b>{{event.endDate}}</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <button role="button" class="collapsed boundary" data-toggle="collapse" [attr.href]="'#collapseBhopal' + ind" aria-expanded="false" aria-controls="collapseBhopal" (click)="EventInBhopalToggleImageSmallDevice(ind)"><span [attr.id]="'moreSmallDeviceEventInBhopal' + ind">+ more</span><span [attr.id]="'lessSmallDeviceEventInBhopal' + ind" class="hiddenSmallDevice">- Less</span></button>
+                                                    <button type="button" class="boundary" *ngIf="admin || bhopalEventCreatoruserId == event.userId" (click)="executeDeleteNews(event.newsId)"><span class="fas fa-trash  fa-1x"></span></button>
+                                                    <div *ngIf="event.url" class="pull-right4"><a href="{{ event.url }}" target="_blank">know more</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>          
+                            </div>
+                        </ng-container> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 ">
+                <div *ngIf="responsse_status === 0">
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                </div>
+                <div *ngIf="responsse_status === 1">
+                    <p class="text-center">there is no event in Bhopal</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">    
+            </div>
+            <div class="col-6 text-right navButton">
+                <a class="btn btn-primary mb-3 mr-1" href="#carouseleventInBhopalSmallDevice" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn btn-primary mb-3 " href="#carouseleventInBhopalSmallDevice" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>       
+    </div>
+</section>

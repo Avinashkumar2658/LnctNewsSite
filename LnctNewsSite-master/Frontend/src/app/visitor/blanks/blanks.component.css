@@ -1,0 +1,111 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-align: center;
+}
+
+span {
+    font-size: 20px;
+    transform: scale(1.4, 1);
+}
+
+.container-fluid {
+    min-width: 20rem;
+    border-radius: 20px;
+    margin-top: -1.9%;
+}
+.heading {
+  text-shadow: 1.4px 1.4px #ff0202;
+  font:500;
+}
+.container {
+    margin-bottom: 0%;
+}
+.d-flex {
+  height:1.5rem;
+  margin-bottom: 0rem;
+}
+img {
+  width:20rem; 
+  height: 25rem;
+}
+.detail {
+  font-family: 1.1em sans-serif;
+  font-weight: 500;
+  font-weight: 500;
+  color: black;
+  overflow: auto;
+}
+.newsHeading {
+  color: black;
+  margin-top: -26rem;
+  font-family: 1.5em sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+.btn {
+  width:20%;
+  text-align: center;
+
+}
+.btnText {
+  display: block;
+  margin-top: -0.2rem;
+  font: 1em sans-serif;
+}
+.event {
+  color: black;
+  margin-top: 15px;
+  font-family: 1.1em sans-serif;
+  text-align: center;
+}
+.eventDate {
+  font-family: 1em sans-serif;
+  font-weight: 500;
+  color: black;
+}
+.spinner {
+    margin:  auto ;
+    width: 70px;
+    text-align: center;
+  left: 50%;
+  }
+  
+  .spinner > div {
+    width: 18px;
+    height: 18px;
+    background-color: rgb(38, 0, 255);;
+  
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+  
+  .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+  
+  .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+  
+  @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% { 
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 40% { 
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+    }
+  }

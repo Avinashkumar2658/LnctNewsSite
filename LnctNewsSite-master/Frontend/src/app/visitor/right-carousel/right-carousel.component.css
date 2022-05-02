@@ -1,0 +1,8 @@
+.container-fluid {
+  padding: 0%;
+  /* height:100rem; */
+}
+img {
+  
+  object-fit: cover;
+}
